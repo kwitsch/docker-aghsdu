@@ -9,13 +9,14 @@ import (
 )
 
 type config struct {
-	DNSContainer string
-	AghContainer string
-	AghHost      string
-	AghUser      string
-	AghPass      string
-	TimerLoop    int
-	Verbose      bool
+	DNSContainer  string
+	AghContainer  string
+	AghHost       string
+	AghUser       string
+	AghPass       string
+	TimerLoop     int
+	ContainerOnly bool
+	Verbose       bool
 }
 
 func Get() config {
@@ -27,6 +28,7 @@ func Get() config {
 		strings.TrimSpace(os.Getenv("AGH_PASSWORD")),
 		10,
 		false,
+		false,
 	}
 	secval, secerr := strconv.ParseBool(os.Getenv("AGH_SECURE"))
 	if secerr == nil && secval == true {
@@ -37,6 +39,10 @@ func Get() config {
 	if looperr == nil && loopval > 0 {
 		res.TimerLoop = loopval
 	}
+	onlyval, onlyerr := strconv.ParseBool(os.Getenv("CONTAINER_ONLY"))
+	if onlyerr == nil {
+		res.ContainerOnly = onlyval
+	}
 	verbval, verberr := strconv.ParseBool(os.Getenv("VERBOSE"))
 	if verberr == nil {
 		res.Verbose = verbval
@@ -46,6 +52,7 @@ func Get() config {
 		fmt.Println("- DNS Container:", res.DNSContainer)
 		fmt.Println("- Agh Container:", res.AghContainer)
 		fmt.Println("- Agh Host:", res.AghHost)
+		fmt.Println("- Container only:", res.ContainerOnly)
 		fmt.Println("- Loop every", res.TimerLoop, "seconds")
 		fmt.Println("---------------------")
 	}

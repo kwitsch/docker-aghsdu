@@ -33,7 +33,7 @@ func main() {
 
 				gsuc, oldinfo := aapi.GetDnsInfo()
 				if gsuc {
-					psuc, newinfo := processor.GenerateNew(oldinfo, aghc.Addresses, dnsc.Addresses, conf.Verbose)
+					psuc, newinfo := processor.GenerateNew(oldinfo, aghc.Addresses, dnsc.Addresses, conf.ContainerOnly, conf.Verbose)
 					if psuc {
 						aapi.SetDnsInfo(newinfo)
 					}

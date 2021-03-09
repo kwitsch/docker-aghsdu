@@ -24,7 +24,7 @@ type DnsInfo struct {
 	Cache_ttl_max      int
 }
 
-func GenerateNew(old string, agh, dns []net.IP, verbose bool) (bool, string) {
+func GenerateNew(old string, agh, dns []net.IP, containeronly, verbose bool) (bool, string) {
 	var dnsconf DnsInfo
 	json.Unmarshal([]byte(old), &dnsconf)
 
@@ -32,7 +32,12 @@ func GenerateNew(old string, agh, dns []net.IP, verbose bool) (bool, string) {
 		fmt.Println("Old DNS:")
 		PrintArr(dnsconf.Upstream_dns)
 	}
-	dnsar := RemoveAll(dnsconf.Upstream_dns, agh)
+	var dnsar []string
+	if containeronly {
+		dnsar = Clean(dnsconf.Upstream_dns)
+	} else {
+		dnsar = RemoveAll(dnsconf.Upstream_dns, agh)
+	}
 	dnsar = AddAll(dnsar, dns)
 
 	if verbose {
@@ -46,6 +51,16 @@ func GenerateNew(old string, agh, dns []net.IP, verbose bool) (bool, string) {
 		return false, ""
 	}
 	return true, string(b)
+}
+
+func Clean(cur []string) []string {
+	res := []string{}
+	for _, i := range cur {
+		if i[0] == '[' {
+			res = append(res, i)
+		}
+	}
+	return res
 }
 
 func RemoveAll(cur []string, agh []net.IP) []string {
