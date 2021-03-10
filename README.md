@@ -1,6 +1,6 @@
 # AdGuardHome Swarm Dns Updater
-Service for updating upstream dns resolvers in AdGuardHome.
-Container addresses are obtained through the Docker DNS server.
+Service for updating upstream dns resolvers in AdGuardHome.<br />
+Container addresses are obtained through the Docker DNS server.<br />
 Upstream DNS resolver are only updated if a address change is detected.
 
 ## Features
