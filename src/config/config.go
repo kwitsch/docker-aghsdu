@@ -2,10 +2,9 @@ package config
 
 import (
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
 	"time"
+
+	EnvWrapper "github.com/kwitsch/go-env_wrapper"
 )
 
 type config struct {
@@ -20,33 +19,23 @@ type config struct {
 }
 
 func Get() config {
+	env := EnvWrapper.Default()
 	res := config{
-		strings.TrimSpace(os.Getenv("DNS_CONTAINER")),
-		strings.TrimSpace(os.Getenv("AGH_CONTAINER")),
+		env.GetString("DNS_CONTAINER"),
+		env.GetString("AGH_CONTAINER"),
 		"http",
-		strings.TrimSpace(os.Getenv("AGH_USER")),
-		strings.TrimSpace(os.Getenv("AGH_PASSWORD")),
-		10,
-		false,
-		false,
+		env.GetString("AGH_USER"),
+		env.GetString("AGH_PASSWORD"),
+		env.GetIntDef("TIMER_LOOP", 10),
+		env.GetBool("CONTAINER_ONLY"),
+		env.GetBool("VERBOSE"),
 	}
-	secval, secerr := strconv.ParseBool(os.Getenv("AGH_SECURE"))
-	if secerr == nil && secval == true {
+
+	if env.GetBool("AGH_SECURE") {
 		res.AghHost += "s"
 	}
-	res.AghHost += "://" + res.AghContainer + ":" + strings.TrimSpace(os.Getenv("AGH_PORT")) + "/control/"
-	loopval, looperr := strconv.Atoi(os.Getenv("TIMER_LOOP"))
-	if looperr == nil && loopval > 0 {
-		res.TimerLoop = loopval
-	}
-	onlyval, onlyerr := strconv.ParseBool(os.Getenv("CONTAINER_ONLY"))
-	if onlyerr == nil {
-		res.ContainerOnly = onlyval
-	}
-	verbval, verberr := strconv.ParseBool(os.Getenv("VERBOSE"))
-	if verberr == nil {
-		res.Verbose = verbval
-	}
+	res.AghHost += "://" + res.AghContainer + ":" + env.GetStringDef("AGH_PORT", "80") + "/control/"
+
 	if res.Verbose {
 		fmt.Println("--- Configuration ---")
 		fmt.Println("- DNS Container:", res.DNSContainer)

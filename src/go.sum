@@ -1,0 +1,7 @@
+github.com/ijustfool/docker-secrets v0.0.0-20191021062307-b25ea5007562 h1:v7V+wm1nJzV1NKyuTRKb8UwHJ7gm9fBV4mqANfQxu+8=
+github.com/ijustfool/docker-secrets v0.0.0-20191021062307-b25ea5007562/go.mod h1:Y7sfMPseINeLXpzmLeRxHD2rdekjyjl91m0T+DC1UCM=
+github.com/kwitsch/go-env_wrapper v0.0.0-20210805192056-df7bd094d20f h1:I9upL/FoFXhrhy/Qi10agS0Ut3ttZq+c6IbIOZtbUKU=
+github.com/kwitsch/go-env_wrapper v0.0.0-20210805192056-df7bd094d20f/go.mod h1:3mi6NzVtePqlo06rVFqJvFkBZtnHmRJ/mG/I//dYKC0=
+github.com/mitchellh/mapstructure v1.1.2 h1:fmNYVwqnSfB9mZU6OS2O6GsXM+wcskZDuKQzvN1EDeE=
+github.com/mitchellh/mapstructure v1.1.2/go.mod h1:FVVH3fgwuzCH5S8UJGiWEs2h04kUh9fWfEaFds41c1Y=
+github.com/yosuke-furukawa/json5 v0.1.1/go.mod h1:sw49aWDqNdRJ6DYUtIQiaA3xyj2IL9tjeNYmX2ixwcU=
