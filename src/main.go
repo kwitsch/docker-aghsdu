@@ -6,6 +6,7 @@ import (
 	"aghsdu/processor"
 	"aghsdu/sc"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -19,12 +20,9 @@ func main() {
 	for {
 		aghc.Lookup()
 		dnsc.Lookup()
-		if !aghc.Active && !dnsc.Active {
-			fmt.Println(aghc.Name, "&", dnsc.Name, "containers are unreachable")
-		} else if !aghc.Active {
-			fmt.Println(aghc.Name, "container is unreachable")
-		} else if !dnsc.Active {
-			fmt.Println(dnsc.Name, "container is unreachable")
+		if !aghc.Active || !dnsc.Active {
+			fmt.Println(aghc.Name, "or", dnsc.Name, "containers are unreachable")
+			os.Exit(1)
 		} else {
 			if aghc.IPChange || dnsc.IPChange {
 				fmt.Println("-- IP Change detected")
