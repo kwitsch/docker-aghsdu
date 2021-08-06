@@ -38,6 +38,7 @@ func main() {
 				}
 			} else {
 				conf.VPrint("-- IP diden't change")
+				dnsc.Print()
 			}
 
 		}
