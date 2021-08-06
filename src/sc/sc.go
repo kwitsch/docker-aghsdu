@@ -30,7 +30,9 @@ func New(name, hostname string, verbose bool) Container {
 
 func (c *Container) Lookup() {
 	ips, err := net.LookupIP(c.Hostname)
-	if err != nil {
+	if err != nil ||
+		len(ips) == 0 ||
+		(len(ips) == 1 && ips[0].String() == "0.0.0.0") {
 		c.Active = false
 		c.Addresses = []net.IP{}
 	} else {
