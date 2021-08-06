@@ -1,9 +1,9 @@
 FROM golang AS build-env
 ADD src /src
 
-RUN apt update ; \
-    apt install gcc ; \
-    cd /src && go build -ldflags "-linkmode external -extldflags -static" -o aghsdu
+RUN apt update
+RUN apt install gcc
+RUN cd /src && go build -ldflags "-linkmode external -extldflags -static" -o aghsdu
 
 FROM scratch
 COPY --from=build-env /src/aghsdu /aghsdu
