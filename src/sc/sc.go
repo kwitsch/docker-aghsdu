@@ -70,12 +70,12 @@ func Contains(ia []net.IP, ci net.IP) bool {
 func (c Container) Print() {
 	if c.Verbose {
 		fmt.Println("-", c.Name)
-		fmt.Println(" - Hostname:", c.Hostname)
-		fmt.Println(" - Active:", c.Active)
+		fmt.Println("| - Hostname:", c.Hostname)
+		fmt.Println("| - Active:", c.Active)
 		if c.Active {
-			fmt.Println(" - IPs:")
+			fmt.Println("| - IPs:")
 			for _, ip := range c.Addresses {
-				fmt.Println("    ", ip.String())
+				fmt.Println("| | ", ip.String())
 			}
 		}
 	}
