@@ -5,9 +5,9 @@ Upstream DNS resolver are only updated if a address change is detected.<br />
 The DNS resolver container can purely run inside an overlay network without exposed ports.
 
 ## Features
-- Alpine 3.12.4 based
-- small size through multistage build
-- all configurations done throug environment variables
+- Golang static build
+- small size through scratch image with only necessarry executable
+- all configurations done throug environment variables or docker secrets(ENV_*secret name*)
 
 ## Environment
 - DNS_CONTAINER: dns container name (Default: unbound)
