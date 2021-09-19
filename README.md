@@ -1,4 +1,11 @@
 # AdGuardHome Swarm Dns Updater
+
+## ***Discontinued!***
+An alternative solution is to insert '127.0.0.11' as bootstrap dns server and 'tcp://*container name*' as upstream dns server.
+
+---
+
+## Description
 Service for updating upstream dns resolver in AdGuardHome container.<br />
 Container addresses are obtained through the Docker DNS resolver.<br />
 Upstream DNS resolver are only updated if a address change is detected.<br />
